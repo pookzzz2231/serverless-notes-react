@@ -66,7 +66,7 @@ export default class Signup extends Component {
 
     this.setState({ isLoading: true });
     try {
-      // auth code then signIn again
+      // check confirm signed up first then check sign in
       await Auth.confirmSignUp(this.state.email, this.state.confirmationCode);
       await Auth.signIn(this.state.email, this.state.password);
 
