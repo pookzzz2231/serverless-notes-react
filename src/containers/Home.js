@@ -23,7 +23,7 @@ export default class Home extends Component {
 
     // for user -> get data
     try {
-      const notes = await this.getNotes();
+      const notes = await this.getAllNotes();
       this.setState({ notes });
     } catch (e) {
       alert(e);
@@ -32,8 +32,8 @@ export default class Home extends Component {
     this.setState({ isLoading: false });
   }
 
-  // get user's notes
-  getNotes() {
+  // get user's all notes
+  getAllNotes() {
     return API.get("notes", "/notes");
   }
 

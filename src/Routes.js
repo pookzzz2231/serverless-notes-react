@@ -6,6 +6,7 @@ import Login from "./containers/Login";
 import Signup from "./containers/Signup";
 import NotFound from "./containers/NotFound";
 import CreateNote from "./containers/CreateNote";
+import Notes from "./containers/Notes";
 
 // will pass in childProps for login state in App.js
 // then AppliedRoute will spread childProps and all other props
@@ -20,6 +21,10 @@ export default ({ childProps }) =>
     <AppliedRoute path="/login" exact component={Login} props={childProps} />
     <AppliedRoute path="/signup" exact component={Signup} props={childProps} />
     <AppliedRoute path="/notes/new" exact component={CreateNote} props={childProps} />
+    {/* will send all matching routes to Notes including notes/new 
+    -> make sure this comes after notes/new */}
+    <AppliedRoute path="/notes/:id" exact component={Notes} props={childProps} />
+
     { /* Finally, catch all unmatched routes */}
     <Route component={NotFound} />
   </Switch>;
