@@ -8,8 +8,6 @@ import "../styles/CreateNote.css";
 const MAX_SIZE = process.env.REACT_APP_MAX_ATTACHMENT_SIZE;
 
 export default class CreateNote extends Component {
-  _isMounted = false;
-
   constructor(props) {
     super(props);
 
@@ -20,8 +18,6 @@ export default class CreateNote extends Component {
       content: ""
     };
   }
-
-
 
   validateForm() {
     return this.state.content.length > 0;
