@@ -29,6 +29,7 @@ export default class Home extends Component {
       alert(e);
     }
 
+    // after ger all note -> stops isLoading
     this.setState({ isLoading: false });
   }
 
@@ -45,6 +46,7 @@ export default class Home extends Component {
           ? <LinkContainer
             // each react list need unique key
             key={note.noteId}
+            // link url to each notes/:noteId
             to={`/notes/${note.noteId}`}
           >
             <ListGroupItem header={note.content.trim().split("\n")[0]}>
@@ -87,6 +89,7 @@ export default class Home extends Component {
     return (
       <div className="notes">
         <PageHeader>Your Notes</PageHeader>
+        {/* after done loading render each note array */}
         <ListGroup>
           {!this.state.isLoading && this.renderNotesList(this.state.notes)}
         </ListGroup>

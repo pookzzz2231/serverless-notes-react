@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { API } from "aws-amplify";
-import s3Upload from "../utils/AWS-S3";
+import { s3Upload } from "../utils/AWS-S3";
 import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 import "../styles/CreateNote.css";
@@ -11,6 +11,8 @@ export default class CreateNote extends Component {
   constructor(props) {
     super(props);
 
+    // file is props instead of state
+    // because file does not need to change or update rendering component
     this.file = null;
 
     this.state = {
@@ -59,6 +61,7 @@ export default class CreateNote extends Component {
         content: this.state.content
       });
 
+      // redirect for valid resolve
       this.props.history.push("/");
     } catch (e) {
       console.log(e);
