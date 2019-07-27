@@ -94,13 +94,13 @@ export default class Notes extends Component {
       // call delete API and delete from param id
       await this.deleteNote();
       await s3Remove(this.state.note.attachment);
-      this.props.history.push("/");
     } catch (error) {
       console.log(error);
       alert(error);
     }
 
     this.setState({ isDeleting: false });
+    this.props.history.push("/");
   }
 
   saveNote(note) {
@@ -142,14 +142,13 @@ export default class Notes extends Component {
         // old attachment or new one
         attachment: attachment || this.state.note.attachment
       });
-
-      this.props.history.push("/");
     } catch (e) {
       console.log(e)
       alert(e)
     }
 
     this.setState({ isLoading: false });
+    this.props.history.push("/");
   }
 
   handleChange = event => {

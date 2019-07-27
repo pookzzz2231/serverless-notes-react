@@ -65,13 +65,16 @@ export default class Signup extends Component {
     event.preventDefault();
 
     this.setState({ isLoading: true });
+
     try {
       // check confirm signed up first then check sign in
       await Auth.confirmSignUp(this.state.email, this.state.confirmationCode);
       await Auth.signIn(this.state.email, this.state.password);
 
       this.props.userHasAuthenticated(true);
-      this.props.history.push("/");
+      this.setState({ isLoading: false });
+      // updated: redirect is in UnauthenticateRoute
+      // this.props.history.push("/");
     } catch (e) {
       // user aleady signed up but hasn't verified send code again
       // check for existing user; code "UsernameExistsException"
@@ -84,8 +87,6 @@ export default class Signup extends Component {
         alert(e.message);
       }
     }
-
-    this.setState({ isLoading: false });
   }
 
   renderConfirmationForm() {

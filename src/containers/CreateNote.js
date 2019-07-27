@@ -60,15 +60,14 @@ export default class CreateNote extends Component {
         attachment,
         content: this.state.content
       });
-
-      // redirect for valid resolve
-      this.props.history.push("/");
     } catch (e) {
       console.log(e);
       alert(e);
     }
 
     this.setState({ isLoading: false });
+    // redirect
+    this.props.history.push("/");
   }
 
   createNote(note) {

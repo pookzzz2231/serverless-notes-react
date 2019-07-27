@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { API } from "aws-amplify";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
 import { PageHeader, ListGroup, ListGroupItem } from "react-bootstrap";
 import "../styles/Home.css";
@@ -73,12 +73,17 @@ export default class Home extends Component {
         <h1>Notes</h1>
         <p>A Note taking app</p>
         <div>
-          <Link to="/login" className="btn btn-info btn-lg">
+          <div>
+            <h3>Please signup or login</h3>
+          </div>
+          {/* <Link to="/login" className="btn btn-info btn-lg">
             Login
           </Link>
+        </div>
+        <div>
           <Link to="/signup" className="btn btn-success btn-lg">
             Signup
-          </Link>
+          </Link> */}
         </div>
       </div>
     );

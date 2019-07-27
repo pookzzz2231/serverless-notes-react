@@ -32,12 +32,14 @@ export default class Login extends Component {
     try {
       await Auth.signIn(this.state.email, this.state.password);
       this.props.userHasAuthenticated(true);
+      // updated: redirect is in UnauthenticateRoute
+
       // Login component is rendered using a Route, 
       // so it will also has Router props
       // which has history as one of the prop 
       // which comes with push method
       // -> history prop stores routes url in our App
-      this.props.history.push("/");
+      // this.props.history.push("/");
     } catch (e) {
       alert(e.message);
     }
@@ -47,7 +49,7 @@ export default class Login extends Component {
 
   render() {
     return (
-      <div className="Login">
+      < div className="Login" >
         <form onSubmit={this.handleSubmit}>
           <FormGroup controlId="email" bsSize="large">
             <ControlLabel>Email</ControlLabel>

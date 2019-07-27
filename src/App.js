@@ -59,6 +59,7 @@ class App extends Component {
 
     return (
       !this.state.isAuthenticating &&
+      // all common navbar
       <div className="App container">
         <Navbar fluid collapseOnSelect>
           <Navbar.Header>
@@ -84,6 +85,9 @@ class App extends Component {
             </Nav>
           </Navbar.Collapse>
         </Navbar>
+        {/* containers */}
+        {/* will pass childProps in all route */}
+        {/* will check match route in Route and render container */}
         <Routes childProps={childProps} />
       </div>
     );
