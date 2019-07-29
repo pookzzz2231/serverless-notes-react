@@ -10,7 +10,6 @@ import NotFound from "./containers/NotFound";
 import CreateNote from "./containers/CreateNote";
 import Note from "./containers/Note";
 
-
 // will pass in childProps for login state in App.js
 // then AppliedRoute will spread childProps and all other props
 // and return <Route .... /> with render func which will render named component

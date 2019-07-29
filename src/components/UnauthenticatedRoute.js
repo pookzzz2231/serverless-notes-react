@@ -21,6 +21,7 @@ export default ({ component: C, props, ...rest }) => {
   // get redirect path for non-user attempting to navigate to page that need auth before login
   // eg: /notes/:id
   const redirect = querystring("redirect");
+  const loggedIn = props.isAuthenticated;
 
   return (
     < Route
@@ -30,7 +31,7 @@ export default ({ component: C, props, ...rest }) => {
           // user not logged in -> render container component
           // -> render loggin, signin
           // with redirect path, if user had tried to access page required auth before redirect to login; ie /notes/:id
-          !props.isAuthenticated ?
+          !loggedIn ?
             <C {...routeProps} {...props} />
             // user already logged in -> go to home
             // user logged in with redirect path -> go to redirect path

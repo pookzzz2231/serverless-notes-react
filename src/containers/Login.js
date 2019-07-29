@@ -28,11 +28,11 @@ export default class Login extends Component {
   handleSubmit = async event => {
     event.preventDefault();
     this.setState({ isLoading: true });
+    // let user;
 
     try {
       await Auth.signIn(this.state.email, this.state.password);
       this.props.userHasAuthenticated(true);
-      // updated: redirect is in UnauthenticateRoute
 
       // Login component is rendered using a Route, 
       // so it will also has Router props
@@ -40,11 +40,21 @@ export default class Login extends Component {
       // which comes with push method
       // -> history prop stores routes url in our App
       // this.props.history.push("/");
+
+      // updated: redirect is handled in UnauthenticateRoute
     } catch (e) {
       alert(e.message);
+
+      // set state isLoading here inside the block to make sure
+      // if set out of try catch blocks means setting out of async then... catch...
+      // will cause memory leak in React
+      this.setState({ isLoading: false });
     }
 
-    this.setState({ isLoading: false });
+    // !!DO NOT set state here; outside of try then catch block
+    // this will make react render component after async block triggers
+    // which then will render this component after redirect and render another component
+    // which cause memory leak
   }
 
   render() {

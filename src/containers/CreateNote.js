@@ -39,6 +39,7 @@ export default class CreateNote extends Component {
 
   handleSubmit = async event => {
     event.preventDefault();
+    let note;
 
     // if file exists and size too large
     if (this.file && this.file.size > MAX_SIZE) {
@@ -53,7 +54,7 @@ export default class CreateNote extends Component {
       const attachment = this.file ? await s3Upload(this.file) : null;
 
       // then await for createNote promise to resolve -> POST API
-      await this.createNote({
+      note = await this.createNote({
         // when upload file's data value will be at S3 key
         // post { attachment: S3_key } to API -> will save in Dynamo DB
         // S3_key is a file name
@@ -65,7 +66,10 @@ export default class CreateNote extends Component {
       alert(e);
     }
 
-    this.setState({ isLoading: false });
+    if (note) {
+      this.setState({ isLoading: false });
+    }
+
     // redirect
     this.props.history.push("/");
   }

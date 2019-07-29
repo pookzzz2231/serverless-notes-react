@@ -19,7 +19,7 @@ export default ({ component: C, props, ...rest }) => {
             // if logged in -> render current container
             // render all passed in props and router props; 
             // match, location and history
-            <C {...props} {...routeProps} />
+            <C {...routeProps} {...props} />
             // redirect to logged in container if not logged in
             : <Redirect
               // when navigate to auth page; ie /notes/:id

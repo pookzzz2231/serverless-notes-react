@@ -51,41 +51,48 @@ export default class Signup extends Component {
         username: this.state.email,
         password: this.state.password
       });
+
       this.setState({
         newUser
       });
     } catch (e) {
+      console.log(e.message);
       alert(e.message);
     }
 
+    // here set isLoading false out of then catch block
+    // since we render another component -> ConfirmSubmit
     this.setState({ isLoading: false });
   }
 
   handleConfirmationSubmit = async event => {
     event.preventDefault();
 
+    // let newUser;
     this.setState({ isLoading: true });
 
     try {
       // check confirm signed up first then check sign in
       await Auth.confirmSignUp(this.state.email, this.state.confirmationCode);
       await Auth.signIn(this.state.email, this.state.password);
-
       this.props.userHasAuthenticated(true);
-      this.setState({ isLoading: false });
-      // updated: redirect is in UnauthenticateRoute
-      // this.props.history.push("/");
+      // when user Auth success will kick of UnauthenticatedRoute and redirect
     } catch (e) {
       // user aleady signed up but hasn't verified send code again
       // check for existing user; code "UsernameExistsException"
       if (e.code === "UsernameExistsException") {
-        const tryAgain = await Auth.resendSignUp(this.state.email);
+        const newUser = await Auth.resendSignUp(this.state.email);
         this.setState({
-          newUser: tryAgain
+          newUser
         });
       } else {
         alert(e.message);
       }
+      console.log(e.message);
+      // set state isLoading here inside the block to make sure
+      // if set out of try catch blocks means setting out of async then... catch...
+      // will cause memory leak in React
+      this.setState({ isLoading: false });
     }
   }
 
